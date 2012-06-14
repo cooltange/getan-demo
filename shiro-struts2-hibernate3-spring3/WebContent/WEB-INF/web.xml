@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	id="WebApp_ID" version="2.5">
+	<display-name>shiro-struts2-hibernate3-spring3</display-name>
+
+	<!-- 欢迎页面 -->
+	<welcome-file-list>
+		<welcome-file>/jsp/login.jsp</welcome-file>
+	</welcome-file-list>
+
+	<error-page>
+		<error-code>401</error-code>
+		<location>/unauthorized.jsp</location>
+	</error-page>
+
+	<!-- spring 配置文件加载匹配规则 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:applicationContext*.xml</param-value>
+	</context-param>
+
+	<!-- h2 内存数据库 -->
+	<listener>
+		<listener-class>org.h2.server.web.DbStarter</listener-class>
+	</listener>
+	<context-param>
+		<param-name>db.url</param-name>
+		<param-value>jdbc:h2:~/test</param-value>
+	</context-param>
+	<context-param>
+		<param-name>db.user</param-name>
+		<param-value>sa</param-value>
+	</context-param>
+	<context-param>
+		<param-name>db.password</param-name>
+		<param-value></param-value>
+	</context-param>
+	<context-param>
+		<param-name>db.tcpServer</param-name>
+		<param-value>-tcpAllowOthers</param-value>
+	</context-param>
+
+	<!-- 缓存清除监听器防止内存泄漏 所有的listener之前 -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+
+	<!-- spring 上下文配置 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- 字符集编码过虑器 -->
+	<filter>
+		<filter-name>encoding</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+
+	<!-- Shiro Filter is defined in the spring application context: -->
+	<filter>
+		<filter-name>openSessionInViewFilter</filter-name>
+		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+	</filter>
+	<filter>
+		<filter-name>shiroFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+
+	<filter-mapping>
+		<filter-name>openSessionInViewFilter</filter-name>
+		<url-pattern>/s/*</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+		<filter-name>shiroFilter</filter-name>
+		<url-pattern>/s/*</url-pattern>
+	</filter-mapping>
+
+	<!-- struts2 过滤器 -->
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- h2 内存数据库 控制台 Servlet -->
+	<servlet>
+		<servlet-name>H2Console</servlet-name>
+		<servlet-class>org.h2.server.web.WebServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>H2Console</servlet-name>
+		<url-pattern>/console/*</url-pattern>
+	</servlet-mapping>
+
+</web-app>

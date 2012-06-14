@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- shiro普通模块 -->
+	<package name="shiro" extends="struts-default">
+	
+		<action name="signup" class="shiroAction" method="signup">
+			<result>/jsp/login.jsp</result>
+		</action>
+		
+	</package>
+	
+	<!-- shiro安全模块 -->
+	<package name="security" extends="struts-default" namespace="/s">
+		<!-- 基于paramsPrepareParamsStack, 增加store interceptor保证actionMessage在redirect后不会丢失 -->
+		<interceptors>
+			<interceptor name="shiroInterceptor" class="shiroInterceptor" />
+			<interceptor-stack name="demoStack">
+				<interceptor-ref name="store">
+					<param name="operationMode">AUTOMATIC</param>
+				</interceptor-ref>
+				<interceptor-ref name="shiroInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+
+		<!-- 定义默认拦截器栈 -->
+		<default-interceptor-ref name="demoStack" />
+
+		<!-- action定义部分 START -->
+
+		<action name="home" class="shiroAction" method="home">
+			<result>/jsp/home.jsp</result>
+		</action>
+		<action name="login" class="shiroAction" method="login">
+			<result name="input">/jsp/login.jsp</result>
+			<result type="redirectAction">home</result>
+		</action>
+		<action name="logout" class="shiroAction" method="logout">
+			<result type="redirect">/</result>
+		</action>
+
+		<action name="manageUsers" class="manageUsersAction" method="manageUsers">
+			<result>/jsp/manageUsers.jsp</result>
+		</action>
+		<action name="editUser" class="manageUsersAction" method="editUser">
+			<result name="editUser">/jsp/editUser.jsp</result>
+		</action>
+		<action name="updateUser" class="manageUsersAction" method="updateUser">
+			<result type="redirectAction">manageUsers</result>
+		</action>
+		<action name="deleteUser" class="manageUsersAction" method="deleteUser">
+			<result type="redirectAction">manageUsers</result>
+		</action>
+
+		<!-- action定义部分 END -->
+
+	</package>
+
+</struts>
