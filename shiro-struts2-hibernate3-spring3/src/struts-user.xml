@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<!-- 用户安全模块 -->
+	<package name="user" extends="securitybase" namespace="/s">
+
+		<action name="home" class="shiroAction" method="home">
+			<result>/jsp/home.jsp</result>
+		</action>
+		<action name="login" class="shiroAction" method="login">
+			<result name="input">/jsp/login.jsp</result>
+			<result type="redirectAction">home</result>
+		</action>
+		<action name="logout" class="shiroAction" method="logout">
+			<result type="redirect">/</result>
+		</action>
+
+		<action name="manageUsers" class="manageUsersAction" method="manageUsers">
+			<result>/jsp/manageUsers.jsp</result>
+		</action>
+		<action name="editUser" class="manageUsersAction" method="editUser">
+			<result name="editUser">/jsp/editUser.jsp</result>
+		</action>
+		<action name="updateUser" class="manageUsersAction" method="updateUser">
+			<result type="redirectAction">manageUsers</result>
+		</action>
+		<action name="deleteUser" class="manageUsersAction" method="deleteUser">
+			<result type="redirectAction">manageUsers</result>
+		</action>
+
+	</package>
+
+	<!-- 用户普通模块 -->
+	<package name="normal" extends="struts-default">
+
+		<action name="signup" class="shiroAction" method="signup">
+			<result>/jsp/login.jsp</result>
+		</action>
+
+	</package>
+
+</struts>
