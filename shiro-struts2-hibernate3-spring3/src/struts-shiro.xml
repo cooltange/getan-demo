@@ -8,7 +8,7 @@
 		<!-- 基于paramsPrepareParamsStack, 增加store interceptor保证actionMessage在redirect后不会丢失 -->
 		<interceptors>
 			<interceptor name="shiroInterceptor" class="shiroInterceptor" />
-			<interceptor-stack name="demoStack">
+			<interceptor-stack name="shiroStack">
 				<interceptor-ref name="store">
 					<param name="operationMode">AUTOMATIC</param>
 				</interceptor-ref>
@@ -18,7 +18,7 @@
 		</interceptors>
 
 		<!-- 定义默认拦截器栈 -->
-		<default-interceptor-ref name="demoStack" />
+		<default-interceptor-ref name="shiroStack" />
 
 		<global-results>
 			<result name="unauthorized">/unauthorized.jsp</result>
