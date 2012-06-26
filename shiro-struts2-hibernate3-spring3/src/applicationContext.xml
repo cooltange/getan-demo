@@ -125,7 +125,7 @@
         <property name="filterChainDefinitions">
             <value>
                 /s/signup = anon
-                /s/manageUsers = perms[user:manage]
+                <!-- /s/manageUsers = perms[user:manage] -->
                 /s/** = authc
             </value>
         </property>
