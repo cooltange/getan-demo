@@ -3,7 +3,7 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-	<!-- 引入demo模块的struts配置文件 -->
+	<!-- 引入用户模块的struts配置文件 -->
 	<include file="struts-user.xml"></include>
 	<!-- 引入shiro模块的struts配置文件 -->
 	<include file="struts-shiro.xml"></include>
