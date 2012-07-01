@@ -8,9 +8,6 @@ import org.apache.shiro.samples.sprhib.service.UserService;
 import org.apache.shiro.samples.sprhib.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.opensymphony.xwork2.ActionSupport;
 
