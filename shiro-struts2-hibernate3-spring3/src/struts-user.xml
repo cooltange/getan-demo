@@ -33,7 +33,7 @@
 	</package>
 
 	<!-- 用户普通模块 -->
-	<package name="normal" extends="struts-default">
+	<package name="normal" extends="struts-base">
 
 		<action name="signup" class="shiroAction" method="signup">
 			<result>/jsp/login.jsp</result>

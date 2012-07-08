@@ -85,6 +85,16 @@
 		<filter-name>shiroFilter</filter-name>
 		<url-pattern>/s/*</url-pattern>
 	</filter-mapping>
+	
+	<!-- SiteMesh Web-Page Layout filter-->
+<!-- 	<filter> -->
+<!-- 		<filter-name>sitemeshFilter</filter-name> -->
+<!-- 		<filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class> -->
+<!-- 	</filter> -->
+<!-- 	<filter-mapping> -->
+<!-- 		<filter-name>sitemeshFilter</filter-name> -->
+<!-- 		<url-pattern>/*</url-pattern> -->
+<!-- 	</filter-mapping> -->
 
 	<!-- struts2 过滤器 -->
 	<filter>
